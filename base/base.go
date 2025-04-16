@@ -14,7 +14,7 @@ struct LibHandle {
 	void *handle;
 };
 
-struct LibHandle *NewLib2(const char *iLibrary)
+struct LibHandle *NewLib6268(const char *iLibrary)
 {
 	struct LibHandle *h = calloc(1,sizeof(struct LibHandle));
 	h->handle = dlopen(iLibrary,1);
@@ -25,7 +25,7 @@ struct LibHandle *NewLib2(const char *iLibrary)
 	return h;
 }
 
-void DestroyLib2(struct LibHandle *h)
+void DestroyLib6268(struct LibHandle *h)
 {
 	if (!h) {
 		return;
@@ -41,28 +41,28 @@ void DestroyLib2(struct LibHandle *h)
 
 // *** 设备管理类函数 ***
 // 1.打开设备
-SGD_RV SDFOpenDevice2(struct LibHandle * h, SGD_HANDLE *phDeviceHandle)
+SGD_RV SDFOpenDevice6268(struct LibHandle * h, SGD_HANDLE *phDeviceHandle)
 {
     typedef SGD_RV (*FPTR)(SGD_HANDLE*);
 	FPTR fptr = (FPTR)dlsym(h->handle, "SDF_OpenDevice");
 	return (*fptr)(phDeviceHandle);
 }
 // 2.关闭设备
-SGD_RV SDFCloseDevice2(struct LibHandle * h,SGD_HANDLE hDeviceHandle)
+SGD_RV SDFCloseDevice6268(struct LibHandle * h,SGD_HANDLE hDeviceHandle)
 {
     typedef SGD_RV (*FPTR)(SGD_HANDLE);
 	FPTR fptr = (FPTR)dlsym(h->handle, "SDF_CloseDevice");
 	return (*fptr)(hDeviceHandle);
 }
 // 3.创建会话
-SGD_RV SDFOpenSession2(struct LibHandle * h,SGD_HANDLE hDeviceHandle, SGD_HANDLE *phSessionHandle)
+SGD_RV SDFOpenSession6268(struct LibHandle * h,SGD_HANDLE hDeviceHandle, SGD_HANDLE *phSessionHandle)
 {
     typedef SGD_RV (*FPTR)(SGD_HANDLE,SGD_HANDLE *);
 	FPTR fptr = (FPTR)dlsym(h->handle, "SDF_OpenSession");
 	return (*fptr)(hDeviceHandle,phSessionHandle);
 }
 // 4.关闭会话
-SGD_RV SDFCloseSession2(struct LibHandle * h,SGD_HANDLE hSessionHandle)
+SGD_RV SDFCloseSession6268(struct LibHandle * h,SGD_HANDLE hSessionHandle)
 {
     typedef SGD_RV (*FPTR)(SGD_HANDLE);
 	FPTR fptr = (FPTR)dlsym(h->handle, "SDF_CloseSession");
@@ -72,7 +72,7 @@ SGD_RV SDFCloseSession2(struct LibHandle * h,SGD_HANDLE hSessionHandle)
 // *** 密码卡管理函数 ***
 
 // 5.初始化设备
-SGD_RV SWCSMInitDevice(struct LibHandle * h, SGD_HANDLE hSessionHandle, SGD_UINT32 uiFlag)
+SGD_RV SWCSMInitDevice6268(struct LibHandle * h, SGD_HANDLE hSessionHandle, SGD_UINT32 uiFlag)
 {
 	typedef SGD_RV (*FPTR)(SGD_HANDLE, SGD_UINT32);
 	FPTR fptr = (FPTR)dlsym(h->handle, "SWCSM_InitDevice");
@@ -80,7 +80,7 @@ SGD_RV SWCSMInitDevice(struct LibHandle * h, SGD_HANDLE hSessionHandle, SGD_UINT
 }
 
 // 12.产生内部ECC密钥对
-SGD_RV SWCSMGenerateECCKeyPair(struct LibHandle * h, SGD_HANDLE hSessionHandle, SGD_UINT32 uiKeyNumber)
+SGD_RV SWCSMGenerateECCKeyPair6268(struct LibHandle * h, SGD_HANDLE hSessionHandle, SGD_UINT32 uiKeyNumber)
 {
 	typedef SGD_RV (*FPTR)(SGD_HANDLE, SGD_UINT32);
 	FPTR fptr = (FPTR)dlsym(h->handle, "SWCSM_GenerateECCKeyPair");
@@ -88,7 +88,7 @@ SGD_RV SWCSMGenerateECCKeyPair(struct LibHandle * h, SGD_HANDLE hSessionHandle, 
 }
 
 // 13.导入ECC密钥对
-SGD_RV SWCSMImportECCKeyPair(struct LibHandle * h, SGD_HANDLE hSessionHandle, SGD_UINT32 uiKeyNumber, ECCrefPublicKey *pucPublicKey, ECCrefPrivateKey *pucPrivateKey)
+SGD_RV SWCSMImportECCKeyPair6268(struct LibHandle * h, SGD_HANDLE hSessionHandle, SGD_UINT32 uiKeyNumber, ECCrefPublicKey *pucPublicKey, ECCrefPrivateKey *pucPrivateKey)
 {
 	typedef SGD_RV (*FPTR)(SGD_HANDLE, SGD_UINT32, ECCrefPublicKey*, ECCrefPrivateKey*);
 	FPTR fptr = (FPTR)dlsym(h->handle, "SWCSM_ImportECCKeyPair");
@@ -96,7 +96,7 @@ SGD_RV SWCSMImportECCKeyPair(struct LibHandle * h, SGD_HANDLE hSessionHandle, SG
 }
 
 // 14.销毁内部ECC密钥对
-SGD_RV SWCSMDestroyECCKeyPair(struct LibHandle * h, SGD_HANDLE hSessionHandle, SGD_UINT32 uiKeyNumber)
+SGD_RV SWCSMDestroyECCKeyPair6268(struct LibHandle * h, SGD_HANDLE hSessionHandle, SGD_UINT32 uiKeyNumber)
 {
 	typedef SGD_RV (*FPTR)(SGD_HANDLE, SGD_UINT32);
 	FPTR fptr = (FPTR)dlsym(h->handle, "SWCSM_DestroyECCKeyPair");
@@ -104,14 +104,14 @@ SGD_RV SWCSMDestroyECCKeyPair(struct LibHandle * h, SGD_HANDLE hSessionHandle, S
 }
 
 // 15.获取密码设备内部密钥状态
-SGD_RV SDFGetKeyStatus(struct LibHandle * h, SGD_HANDLE hSessionHandle, SGD_UINT32 uiKeyType, SGD_UINT32 *puiKeyStatus, SGD_UINT32 *puiKeyCount) {
+SGD_RV SDFGetKeyStatus6268(struct LibHandle * h, SGD_HANDLE hSessionHandle, SGD_UINT32 uiKeyType, SGD_UINT32 *puiKeyStatus, SGD_UINT32 *puiKeyCount) {
 	typedef SGD_RV (*FPTR)(SGD_HANDLE, SGD_UINT32, SGD_UINT32*, SGD_UINT32*);
 	FPTR fptr = (FPTR)dlsym(h->handle, "SDF_GetKeyStatus");
 	return (*fptr)(hSessionHandle, uiKeyType, puiKeyStatus, puiKeyCount);
 }
 
 // 16.备份初始化
-SGD_RV SWCSMBackupInitNoIC(struct LibHandle * h, SGD_HANDLE hSessionHandle, SGD_UINT32 uiAlgorithmID, SGD_UCHAR *passwd, SGD_UINT32 uiPwdLength)
+SGD_RV SWCSMBackupInitNoIC6268(struct LibHandle * h, SGD_HANDLE hSessionHandle, SGD_UINT32 uiAlgorithmID, SGD_UCHAR *passwd, SGD_UINT32 uiPwdLength)
 {
 	typedef SGD_RV (*FPTR)(SGD_HANDLE, SGD_UINT32, SGD_UCHAR*, SGD_UINT32);
 	FPTR fptr = (FPTR)dlsym(h->handle, "SWCSM_BackupInit_NoIC");
@@ -119,7 +119,7 @@ SGD_RV SWCSMBackupInitNoIC(struct LibHandle * h, SGD_HANDLE hSessionHandle, SGD_
 }
 
 // 18.备份导出ECC密钥对
-SGD_RV SWCSMBackupExportECCKey(struct LibHandle * h, SGD_HANDLE hSessionHandle, SGD_UINT32 uiIndex, SGD_UINT32 *puiKeyBits, SGD_UCHAR *pucKeyData, SGD_UINT32 *puiKeyDataLength)
+SGD_RV SWCSMBackupExportECCKey6268(struct LibHandle * h, SGD_HANDLE hSessionHandle, SGD_UINT32 uiIndex, SGD_UINT32 *puiKeyBits, SGD_UCHAR *pucKeyData, SGD_UINT32 *puiKeyDataLength)
 {
 	typedef SGD_RV (*FPTR)(SGD_HANDLE, SGD_UINT32, SGD_UINT32*, SGD_UCHAR*, SGD_UINT32*);
 	FPTR fptr = (FPTR)dlsym(h->handle, "SWCSM_BackupExportECCKey");
@@ -127,7 +127,7 @@ SGD_RV SWCSMBackupExportECCKey(struct LibHandle * h, SGD_HANDLE hSessionHandle, 
 }
 
 // 20.备份结束
-SGD_RV SWCSMBackupFinal(struct LibHandle * h, SGD_HANDLE hSessionHandle)
+SGD_RV SWCSMBackupFinal6268(struct LibHandle * h, SGD_HANDLE hSessionHandle)
 {
 	typedef SGD_RV (*FPTR)(SGD_HANDLE);
 	FPTR fptr = (FPTR)dlsym(h->handle, "SWCSM_BackupFinal");
@@ -135,7 +135,7 @@ SGD_RV SWCSMBackupFinal(struct LibHandle * h, SGD_HANDLE hSessionHandle)
 }
 
 // 21.恢复初始化
-SGD_RV SWCSMRestoreInitNoIC(struct LibHandle * h, SGD_HANDLE hSessionHandle, SGD_UINT32 uiAlgorithmID, SGD_UCHAR *passwd, SGD_UINT32 uiPwdLength)
+SGD_RV SWCSMRestoreInitNoIC6268(struct LibHandle * h, SGD_HANDLE hSessionHandle, SGD_UINT32 uiAlgorithmID, SGD_UCHAR *passwd, SGD_UINT32 uiPwdLength)
 {
 	typedef SGD_RV (*FPTR)(SGD_HANDLE, SGD_UINT32, SGD_UCHAR*, SGD_UINT32);
 	FPTR fptr = (FPTR)dlsym(h->handle, "SWCSM_RestoreInit_NoIC");
@@ -143,7 +143,7 @@ SGD_RV SWCSMRestoreInitNoIC(struct LibHandle * h, SGD_HANDLE hSessionHandle, SGD
 }
 
 // 23.恢复导入ECC密钥对
-SGD_RV SWCSMRestoreImportECCKey(struct LibHandle * h, SGD_HANDLE hSessionHandle, SGD_UINT32 uiIndex, SGD_UINT32 uiKeyBits, SGD_UCHAR *pucKeyData, SGD_UINT32 uiKeyDataLength)
+SGD_RV SWCSMRestoreImportECCKey6268(struct LibHandle * h, SGD_HANDLE hSessionHandle, SGD_UINT32 uiIndex, SGD_UINT32 uiKeyBits, SGD_UCHAR *pucKeyData, SGD_UINT32 uiKeyDataLength)
 {
 	typedef SGD_RV (*FPTR)(SGD_HANDLE, SGD_UINT32, SGD_UINT32, SGD_UCHAR*, SGD_UINT32);
 	FPTR fptr = (FPTR)dlsym(h->handle, "SWCSM_RestoreImportECCKey");
@@ -151,7 +151,7 @@ SGD_RV SWCSMRestoreImportECCKey(struct LibHandle * h, SGD_HANDLE hSessionHandle,
 }
 
 // 25.恢复结束
-SGD_RV SWCSMRestoreFinal(struct LibHandle * h, SGD_HANDLE hSessionHandle)
+SGD_RV SWCSMRestoreFinal6268(struct LibHandle * h, SGD_HANDLE hSessionHandle)
 {
 	typedef SGD_RV (*FPTR)(SGD_HANDLE);
 	FPTR fptr = (FPTR)dlsym(h->handle, "SWCSM_RestoreFinal");
@@ -172,7 +172,7 @@ func New(libPath string) *Ctx {
 	c := new(Ctx)
 	mod := C.CString(libPath)
 	defer C.free(unsafe.Pointer(mod))
-	c.libHandle = C.NewLib2(mod)
+	c.libHandle = C.NewLib6268(mod)
 	if c.libHandle == nil {
 		return nil
 	}
@@ -231,47 +231,47 @@ func ConvertToECCrefPublicKeyC(publicKey *sm2.PublicKey) (pucPublicKey C.ECCrefP
 }
 
 func (c *Ctx) Destroy() {
-	C.DestroyLib2(c.libHandle)
+	C.DestroyLib6268(c.libHandle)
 }
 
 // SDFOpenDevice 1.打开设备
 func (c *Ctx) SDFOpenDevice() (deviceHandle SessionHandle, err error) {
 	var rv C.SGD_RV
 	var dH C.SGD_HANDLE
-	rv = C.SDFOpenDevice2(c.libHandle, &dH)
+	rv = C.SDFOpenDevice6268(c.libHandle, &dH)
 	deviceHandle = SessionHandle(dH)
 	return deviceHandle, ToError(rv)
 }
 
 // SDFCloseDevice 2.关闭设备
 func (c *Ctx) SDFCloseDevice(deviceHandle SessionHandle) (err error) {
-	var rv = C.SDFCloseDevice2(c.libHandle, C.SGD_HANDLE(deviceHandle))
+	var rv = C.SDFCloseDevice6268(c.libHandle, C.SGD_HANDLE(deviceHandle))
 	return ToError(rv)
 }
 
 // SDFOpenSession 3.创建会话
 func (c *Ctx) SDFOpenSession(deviceHandle SessionHandle) (SessionHandle, error) {
 	var s C.SGD_HANDLE
-	var rv = C.SDFOpenSession2(c.libHandle, C.SGD_HANDLE(deviceHandle), &s)
+	var rv = C.SDFOpenSession6268(c.libHandle, C.SGD_HANDLE(deviceHandle), &s)
 	return SessionHandle(s), ToError(rv)
 }
 
 // SDFCloseSession 4.关闭会话
 func (c *Ctx) SDFCloseSession(sessionHandle SessionHandle) error {
-	var err = C.SDFCloseSession2(c.libHandle, C.SGD_HANDLE(sessionHandle))
+	var err = C.SDFCloseSession6268(c.libHandle, C.SGD_HANDLE(sessionHandle))
 	return ToError(err)
 }
 
 // SWCSMInitDevice 5.初始化设备
 func (c *Ctx) SWCSMInitDevice(sessionHandle SessionHandle) error {
 	var uiFlag int = 1
-	var rv = C.SWCSMInitDevice(c.libHandle, C.SGD_HANDLE(sessionHandle), C.SGD_UINT32(uiFlag))
+	var rv = C.SWCSMInitDevice6268(c.libHandle, C.SGD_HANDLE(sessionHandle), C.SGD_UINT32(uiFlag))
 	return ToError(rv)
 }
 
 // SWCSMGenerateECCKeyPair 12.产生内部ECC密钥对
 func (c *Ctx) SWCSMGenerateECCKeyPair(sessionHandle SessionHandle, keyIndex uint32) error {
-	var rv = C.SWCSMGenerateECCKeyPair(c.libHandle, C.SGD_HANDLE(sessionHandle), C.SGD_UINT32(keyIndex))
+	var rv = C.SWCSMGenerateECCKeyPair6268(c.libHandle, C.SGD_HANDLE(sessionHandle), C.SGD_UINT32(keyIndex))
 	return ToError(rv)
 }
 
@@ -280,20 +280,20 @@ func (c *Ctx) SWCSMImportECCKeyPair(sessionHandle SessionHandle, keyIndex uint32
 	privKey := ConvertToECCrefPrivateKeyC(privateKey)
 	pubKey := ConvertToECCrefPublicKeyC(&privateKey.PublicKey)
 
-	var rv = C.SWCSMImportECCKeyPair(c.libHandle, C.SGD_HANDLE(sessionHandle), C.SGD_UINT32(keyIndex), &pubKey, &privKey)
+	var rv = C.SWCSMImportECCKeyPair6268(c.libHandle, C.SGD_HANDLE(sessionHandle), C.SGD_UINT32(keyIndex), &pubKey, &privKey)
 	return ToError(rv)
 }
 
 // SWCSMDestroyECCKeyPair 14.销毁内部ECC密钥对
 func (c *Ctx) SWCSMDestroyECCKeyPair(sessionHandle SessionHandle, keyIndex uint32) error {
-	var rv = C.SWCSMDestroyECCKeyPair(c.libHandle, C.SGD_HANDLE(sessionHandle), C.SGD_UINT32(keyIndex))
+	var rv = C.SWCSMDestroyECCKeyPair6268(c.libHandle, C.SGD_HANDLE(sessionHandle), C.SGD_UINT32(keyIndex))
 	return ToError(rv)
 }
 
 // SDFGetKeyStatus 15.获取密码设备内部密钥状态
 func (c *Ctx) SDFGetKeyStatus(sessionHandle SessionHandle, keyType KeyType) (keyStatus []uint32, maxKeyCount uint32, err error) {
 	keyStatus = make([]uint32, 1000)
-	var rv = C.SDFGetKeyStatus(c.libHandle, C.SGD_HANDLE(sessionHandle), C.SGD_UINT32(keyType),
+	var rv = C.SDFGetKeyStatus6268(c.libHandle, C.SGD_HANDLE(sessionHandle), C.SGD_UINT32(keyType),
 		(*C.SGD_UINT32)(unsafe.Pointer(&keyStatus[0])), (*C.SGD_UINT32)(unsafe.Pointer(&maxKeyCount)))
 	if err = ToError(rv); err != nil {
 		return
@@ -305,7 +305,7 @@ func (c *Ctx) SDFGetKeyStatus(sessionHandle SessionHandle, keyType KeyType) (key
 	}
 
 	keyStatus = make([]uint32, maxKeyCount)
-	rv = C.SDFGetKeyStatus(c.libHandle, C.SGD_HANDLE(sessionHandle), C.SGD_UINT32(keyType),
+	rv = C.SDFGetKeyStatus6268(c.libHandle, C.SGD_HANDLE(sessionHandle), C.SGD_UINT32(keyType),
 		(*C.SGD_UINT32)(unsafe.Pointer(&keyStatus[0])), (*C.SGD_UINT32)(unsafe.Pointer(&maxKeyCount)))
 	err = ToError(rv)
 	return
@@ -316,7 +316,7 @@ func (c *Ctx) SWCSMBackupInitNoIC(sessionHandle SessionHandle, passwd []byte) er
 	cPasswd := C.CBytes(passwd)
 	defer C.free(cPasswd)
 
-	rv := C.SWCSMBackupInitNoIC(c.libHandle, C.SGD_HANDLE(sessionHandle), C.SGD_SM1_ECB, (*C.SGD_UCHAR)(cPasswd), C.SGD_UINT32(len(passwd)))
+	rv := C.SWCSMBackupInitNoIC6268(c.libHandle, C.SGD_HANDLE(sessionHandle), C.SGD_SM1_ECB, (*C.SGD_UCHAR)(cPasswd), C.SGD_UINT32(len(passwd)))
 	return ToError(rv)
 }
 
@@ -331,7 +331,7 @@ func (c *Ctx) SWCSMBackupExportECCKey(sessionHandle SessionHandle, keyIndex uint
 	}
 	defer C.free(keyDataPtr)
 
-	rv := C.SWCSMBackupExportECCKey(c.libHandle, C.SGD_HANDLE(sessionHandle), C.SGD_UINT32(keyIndex),
+	rv := C.SWCSMBackupExportECCKey6268(c.libHandle, C.SGD_HANDLE(sessionHandle), C.SGD_UINT32(keyIndex),
 		(*C.SGD_UINT32)(unsafe.Pointer(&keyBits)), (*C.SGD_UCHAR)(keyDataPtr), (*C.SGD_UINT32)(unsafe.Pointer(&keyDataLength)))
 
 	keyData = C.GoBytes(unsafe.Pointer(keyDataPtr), C.int(keyDataLength))
@@ -340,7 +340,7 @@ func (c *Ctx) SWCSMBackupExportECCKey(sessionHandle SessionHandle, keyIndex uint
 
 // SWCSMBackupFinal 20.备份结束
 func (c *Ctx) SWCSMBackupFinal(sessionHandle SessionHandle) error {
-	rv := C.SWCSMBackupFinal(c.libHandle, C.SGD_HANDLE(sessionHandle))
+	rv := C.SWCSMBackupFinal6268(c.libHandle, C.SGD_HANDLE(sessionHandle))
 	return ToError(rv)
 }
 
@@ -349,7 +349,7 @@ func (c *Ctx) SWCSMRestoreInitNoIC(sessionHandle SessionHandle, passwd []byte) e
 	cPasswd := C.CBytes(passwd)
 	defer C.free(cPasswd)
 
-	rv := C.SWCSMRestoreInitNoIC(c.libHandle, C.SGD_HANDLE(sessionHandle), C.SGD_SM1_ECB, (*C.SGD_UCHAR)(cPasswd), C.SGD_UINT32(len(passwd)))
+	rv := C.SWCSMRestoreInitNoIC6268(c.libHandle, C.SGD_HANDLE(sessionHandle), C.SGD_SM1_ECB, (*C.SGD_UCHAR)(cPasswd), C.SGD_UINT32(len(passwd)))
 	return ToError(rv)
 }
 
@@ -360,13 +360,13 @@ func (c *Ctx) SWCSMRestoreImportECCKey(sessionHandle SessionHandle, keyIndex uin
 
 	maxBits := uint32(ECCref_MAX_BITS)
 
-	rv := C.SWCSMRestoreImportECCKey(c.libHandle, C.SGD_HANDLE(sessionHandle), C.SGD_UINT32(keyIndex), C.SGD_UINT32(maxBits),
+	rv := C.SWCSMRestoreImportECCKey6268(c.libHandle, C.SGD_HANDLE(sessionHandle), C.SGD_UINT32(keyIndex), C.SGD_UINT32(maxBits),
 		(*C.SGD_UCHAR)(cKeyData), C.SGD_UINT32(len(keyData)))
 	return ToError(rv)
 }
 
 // SWCSMRestoreFinal 25.恢复结束
 func (c *Ctx) SWCSMRestoreFinal(sessionHandle SessionHandle) error {
-	rv := C.SWCSMRestoreFinal(c.libHandle, C.SGD_HANDLE(sessionHandle))
+	rv := C.SWCSMRestoreFinal6268(c.libHandle, C.SGD_HANDLE(sessionHandle))
 	return ToError(rv)
 }
