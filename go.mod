@@ -6,7 +6,6 @@ require (
 	github.com/pingcap/errors v0.11.4
 	github.com/tjfoc/gmsm v1.4.1
 	github.com/treeforest/golog v1.2.0
-	github.com/treeforest/swcsm v0.2.0
 )
 
 require (

@@ -3,7 +3,7 @@ package swcsm
 import (
 	"github.com/pingcap/errors"
 	"github.com/tjfoc/gmsm/sm2"
-	"github.com/treeforest/swcsm/base"
+	"github.com/treeforest/swcsm6268/base"
 )
 
 // InitDevice 初始化设备

@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"github.com/tjfoc/gmsm/sm2"
 	log "github.com/treeforest/golog"
-	"github.com/treeforest/swcsm"
+	swcsm "github.com/treeforest/swcsm6268"
 	"os"
 )
 

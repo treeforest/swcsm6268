@@ -2,7 +2,7 @@ package swcsm
 
 import (
 	"fmt"
-	"github.com/treeforest/swcsm/base"
+	"github.com/treeforest/swcsm6268/base"
 	"log"
 	"os"
 	"strconv"
